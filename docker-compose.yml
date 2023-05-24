@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  register_api:
+    container_name: register_api
+    image: node:18-alpine
+    ports:
+      - 3001:3000
+    tty: true
+    stdin_open: true
+    working_dir: /usr/app
+    volumes:
+      - ./registerAPI:/usr/app
+  register_db:
+    container_name: register_db
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=gym
+    volumes:
+      - ./registerAPI/dumps/:/docker-entrypoint-initdb.d/
+  cep_api:
+    container_name: cep_api
+    image: node:18-alpine
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
+    working_dir: /usr/app
+    volumes:
+      - ./consultaEnderecoAPI/:/usr/app
+  mailer_api:
+    container_name: mailer_api
+    image: node:18-alpine
+    tty: true
+    stdin_open: true
+    working_dir: /usr/app
+    volumes:
+      - ./mailerServiceAPI/:/usr/app
+    env_file:
+      - ./mailerServiceAPI/.env
+    ports:
+      - 3002:3000
+
