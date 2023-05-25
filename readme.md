@@ -5,8 +5,7 @@
 
 ### Exemplo de Microserviço para registrar pessoas usuárias e enviar notificações de email com Nodemailer e MailTrap
 
-<br />
-
+---
 
 ### Primeiro passo:
 
@@ -110,8 +109,8 @@ Envia uma mensagem de email utilizando o `MailTrap`
 
 ### Microservice Example to Register Users and Send Email Notifications Using Nodemailer and MailTrap
 
+---
 
-<br />
 ### 1st step:
 
 -  Setup ENV Variables in `mailerServiceAPI`
