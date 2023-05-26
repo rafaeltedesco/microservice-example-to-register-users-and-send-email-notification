@@ -5,7 +5,6 @@ const redisClient = redis.createClient({
 });
 
 const cacheData = async (key, data) => {
-  console.log(key, data);
   await redisClient.connect();
   await redisClient.set(key, JSON.stringify(data));
   console.log('Data persisted in Redis!');
