@@ -97,7 +97,9 @@ Envia uma mensagem de email utilizando o `MailTrap`
 *Desafios para você*:
 
 - Adicione o Redis na `registerAPI` para diminuir a latência quando consultando um novo CEP
+  *A branch redis-solution demonstra uma possível maneira de realizar essa implementação. Tendo sido adicionada apenas para o `registerAPI`. Tente adicionar no serviço `consultaEnderecoAPI` também.*
 - Adicione Kafka, RabbitMQ, Bull ou qualquer outro sistema de filas para enviar os emails em plano de fundo sem segurar a resposta.
+  *A branch email-solution demonstra uma possível implementação utilizando um sistema de Queue com bulljs*
 
 </details>
 
@@ -202,5 +204,8 @@ It sends an email with a message using `MailTrap`
 * Challenges for you, dear reader/developer
 
 - Add Redis on registerAPI when fetching a CEP to lower latency
+  *The branch redis-solution shows a possible way to implement this resource. Redis was configured only for `registerAPI` service. Try to add in `consultaEnderecoAPI` also.*
 - Add Kafka, RabbitMQ or Bull to send mails in background wihout holding reply
+  *The branch email-solution shows one possible solution using a Queue System with bulljs*
+
 </details>
