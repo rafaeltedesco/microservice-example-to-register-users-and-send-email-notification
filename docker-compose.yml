@@ -59,4 +59,11 @@ services:
     ports:
       - 3002:3000
     command: npm run dev
+  redis_compose:
+    image: redis
+    container_name: redis_compose
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/:/var/lib/postgresql/data
 
