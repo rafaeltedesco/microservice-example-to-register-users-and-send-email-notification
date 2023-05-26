@@ -1,10 +1,14 @@
 const connection = require('../db/connection');
 
 const findAddressIdIfExists = async ({ cep }) => {
+  let formatedCEP = cep;
+  if (!formatedCEP.includes('-')) {
+    formatedCEP = `${formatedCEP.slice(0, 5)}-${formatedCEP.slice(5)}`
+  }
   const [result] = await connection.execute(
-    `SELECT * FROM customer_address WHERE cep = ?`, [cep]
+    `SELECT * FROM customer_address WHERE cep = ?`, [formatedCEP]
   );
-  return result.length > 0 ? result.id : undefined;
+  return result.length > 0 ? result[0].id : undefined;
 }
 
 const createAddress = async ({ cep, logradouro, complemento, bairro, localidade, uf }) => {

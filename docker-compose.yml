@@ -11,6 +11,16 @@ services:
     working_dir: /usr/app
     volumes:
       - ./registerAPI:/usr/app
+    command: npm run dev
+    depends_on:
+      register_db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
   register_db:
     container_name: register_db
     image: mysql:8
@@ -21,6 +31,10 @@ services:
       - MYSQL_DATABASE=gym
     volumes:
       - ./registerAPI/dumps/:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
   cep_api:
     container_name: cep_api
     image: node:18-alpine
@@ -31,6 +45,7 @@ services:
     working_dir: /usr/app
     volumes:
       - ./consultaEnderecoAPI/:/usr/app
+    command: npm run dev
   mailer_api:
     container_name: mailer_api
     image: node:18-alpine
@@ -43,4 +58,5 @@ services:
       - ./mailerServiceAPI/.env
     ports:
       - 3002:3000
+    command: npm run dev
 
